@@ -49,36 +49,48 @@ static UIImage *STKScoreboardClosedImage = nil;
 - (void)loadImagesIfNecessary
 {
     if(!STKScoreboardClosedImage) {
-        UIGraphicsBeginImageContext(CGSizeMake(100, 100));
-
+        CGSize imageSize = CGSizeMake(100, 100);
+        CGFloat lineWidth = 4;
+        
+        UIGraphicsBeginImageContext(imageSize);
+        
+        CGFloat crossDeltaX = imageSize.width * sqrt(2) / 2;
+        CGFloat crossDeltaY = crossDeltaX;
+        CGPoint crossOrigin = CGPointMake( (imageSize.width - crossDeltaX) / 2,
+                                          (imageSize.height - crossDeltaY) / 2);
+        
         [[UIColor blackColor] set];
-
+        
         UIBezierPath *bp = [UIBezierPath bezierPath];
-        [bp moveToPoint:CGPointMake(16, 16)];
-        [bp addLineToPoint:CGPointMake(84, 84)];
-        [bp setLineWidth:4];
+        [bp moveToPoint:crossOrigin];
+        [bp addLineToPoint:CGPointMake(crossOrigin.x + crossDeltaX,
+                                       crossOrigin.y + crossDeltaY)];
+        [bp setLineWidth:lineWidth];
         [bp stroke];
         
         STKScoreboardSingleImage = UIGraphicsGetImageFromCurrentImageContext();
         
         bp = [UIBezierPath bezierPath];
-        [bp moveToPoint:CGPointMake(84, 16)];
-        [bp addLineToPoint:CGPointMake(16, 84)];
-        [bp setLineWidth:4];
+        [bp moveToPoint:CGPointMake(crossOrigin.x + crossDeltaX, crossOrigin.y)];
+        [bp addLineToPoint:CGPointMake(crossOrigin.x, crossOrigin.y + crossDeltaY)];
+        [bp setLineWidth:lineWidth];
         [bp stroke];
         
         STKScoreboardDoubleImage = UIGraphicsGetImageFromCurrentImageContext();
         
         
-        bp = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(2, 2, 96, 96)];
-        [bp setLineWidth:4];
+        bp = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(lineWidth / 2,
+                                                               lineWidth / 2,
+                                                               imageSize.width - lineWidth,
+                                                               imageSize.height - lineWidth)];
+        [bp setLineWidth:lineWidth];
         [bp stroke];
-
+        
         STKScoreboardClosedImage = UIGraphicsGetImageFromCurrentImageContext();
-
+        
         
         UIGraphicsEndImageContext();
-
+        
     }
 }
 
