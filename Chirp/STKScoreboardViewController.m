@@ -54,16 +54,16 @@ static UIImage *STKScoreboardClosedImage = nil;
         [[UIColor blackColor] set];
 
         UIBezierPath *bp = [UIBezierPath bezierPath];
-        [bp moveToPoint:CGPointMake(0, 0)];
-        [bp addLineToPoint:CGPointMake(100, 100)];
+        [bp moveToPoint:CGPointMake(16, 16)];
+        [bp addLineToPoint:CGPointMake(84, 84)];
         [bp setLineWidth:4];
         [bp stroke];
         
         STKScoreboardSingleImage = UIGraphicsGetImageFromCurrentImageContext();
         
         bp = [UIBezierPath bezierPath];
-        [bp moveToPoint:CGPointMake(100, 0)];
-        [bp addLineToPoint:CGPointMake(0, 100)];
+        [bp moveToPoint:CGPointMake(84, 16)];
+        [bp addLineToPoint:CGPointMake(16, 84)];
         [bp setLineWidth:4];
         [bp stroke];
         
