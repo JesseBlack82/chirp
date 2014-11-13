@@ -167,7 +167,7 @@ static UIImage *STKScoreboardClosedImage = nil;
     if([indexPath row] % ([[[self game] players] count] + 1) == 0) {
         [[c label] setHidden:NO];
         
-        int num = [indexPath row] / ([[[self game] players] count] + 1);
+        NSInteger num = [indexPath row] / ([[[self game] players] count] + 1);
         num = 7 - num;
         if(num == 7) {
             [[c label] setText:@""];
@@ -176,7 +176,7 @@ static UIImage *STKScoreboardClosedImage = nil;
         } else if(num == -1) {
             [[c label] setText:@"Score"];
         } else {
-            [[c label] setText:[NSString stringWithFormat:@"%d", num + 14]];
+            [[c label] setText:[NSString stringWithFormat:@"%ld", num + 14]];
         }
     } else {
         if([indexPath row] < [[[self game] players] count] + 1) {
@@ -185,7 +185,7 @@ static UIImage *STKScoreboardClosedImage = nil;
         } else if([collectionView numberOfItemsInSection:0] - [indexPath row] - 1 < [[[self game] players] count]) {
             [[c label] setHidden:NO];
             NSInteger playerIndex = [indexPath row] % ([[[self game] players] count] + 1) - 1;
-            [[c label] setText:[NSString stringWithFormat:@"%d", [[[[self game] players] objectAtIndex:playerIndex] score]]];
+            [[c label] setText:[NSString stringWithFormat:@"%ld", [[[[self game] players] objectAtIndex:playerIndex] score]]];
         
         } else {
             [[c dartImageView] setHidden:NO];
